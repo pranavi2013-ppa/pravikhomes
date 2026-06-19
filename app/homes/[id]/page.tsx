@@ -41,7 +41,7 @@ export default async function HomeDetailPage({
       label: rental.bedrooms === 0 ? "Studio" : `${rental.bedrooms} bedroom${rental.bedrooms > 1 ? "s" : ""}`,
     },
     { icon: Bath, label: `${rental.bathrooms} bathroom${rental.bathrooms > 1 ? "s" : ""}` },
-    { icon: Maximize, label: `${rental.size} m²` },
+    { icon: Maximize, label: `${rental.size.toLocaleString()} sq ft` },
     { icon: Building2, label: rental.floor },
   ]
 

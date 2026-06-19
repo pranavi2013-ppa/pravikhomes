@@ -48,7 +48,7 @@ export default function HomePage() {
 
               <div className="relative aspect-[4/3] overflow-hidden rounded-3xl border border-border lg:aspect-[5/6]">
                 <Image
-                  src="/rentals/building-exterior.png"
+                  src="/pravik/building.jpeg"
                   alt={`Exterior of ${landlord.buildingName}`}
                   fill
                   priority

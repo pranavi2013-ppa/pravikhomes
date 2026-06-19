@@ -56,7 +56,7 @@ export function RentalCard({ rental }: { rental: Rental }) {
           </span>
           <span className="flex items-center gap-1.5">
             <Maximize className="size-4" aria-hidden="true" />
-            {rental.size} m²
+            {rental.size.toLocaleString()} sq ft
           </span>
         </div>
 

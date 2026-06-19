@@ -140,7 +140,7 @@ export function ContactSection({ defaultUnit }: { defaultUnit?: string }) {
                   id="unit"
                   name="unit"
                   defaultValue={defaultUnit}
-                  placeholder="e.g. Unit 2 — One Bedroom"
+                  placeholder="e.g. 2nd Floor — 2BHK"
                 />
               </div>
               <div className="flex flex-col gap-2">

@@ -1,8 +1,8 @@
 // =============================================================
 //  EDIT YOUR LISTINGS HERE
-//  Replace the photos in /public/rentals with your own images,
-//  add a `video` path (e.g. "/rentals/unit-1-tour.mp4") to show
-//  a video tour, and update the text/specs for each unit.
+//  Photos live in /public/pravik. To add a new photo, drop the
+//  file in that folder and reference it as "/pravik/your-file.jpeg".
+//  Update the contact details, rent, and text for each flat below.
 // =============================================================
 
 export type Rental = {
@@ -15,123 +15,131 @@ export type Rental = {
   currency: string
   bedrooms: number
   bathrooms: number
-  size: number // in square meters
+  size: number // in square feet
   floor: string
   /** First image is used as the cover photo. */
   images: string[]
-  /** Optional video tour. Add an mp4 to /public/rentals and reference it here. */
+  /** Optional video tour. Add an mp4 to /public/pravik and reference it here. */
   video?: string
   amenities: string[]
 }
 
 export const landlord = {
-  buildingName: "Maple Court Residences",
-  tagline: "A small, well-kept building with a handful of homes for rent.",
+  buildingName: "PravikHomes",
+  tagline: "Brand-new, semi-furnished 2BHK flats for rent in a quiet, well-kept building.",
   intro:
-    "Welcome! This is a private building with a few comfortable homes available to rent. Browse the photos and video tours below, and reach out anytime with questions or to arrange a visit.",
-  address: "12 Maple Court, Riverside",
-  phone: "+1 (555) 123-4567",
+    "PravikHomes is a newly built residential building with a handful of bright, semi-furnished 2BHK flats for rent. Each home comes with a modern modular kitchen, fitted wardrobes, large windows and attached bathrooms. Browse the photos and walkthrough video below, and reach out anytime to arrange a visit.",
+  address: "Bengaluru, Karnataka",
+  // TODO: replace with your real phone number.
+  phone: "+91 90000 00000",
   // Digits only, with country code, no symbols — used for the WhatsApp link.
-  whatsapp: "15551234567",
-  email: "hello@maplecourt.example",
+  whatsapp: "919000000000",
+  // TODO: replace with your real email.
+  email: "pravikhomes@example.com",
 }
+
+const commonAmenities = [
+  "Modern modular kitchen",
+  "Fitted wardrobes",
+  "Attached bathrooms with geyser point",
+  "Vitrified tile flooring",
+  "Wooden-finish flooring in bedrooms",
+  "Balcony",
+  "Ceiling fans & lights fitted",
+  "Lift access",
+  "24/7 water supply",
+  "Covered parking",
+]
 
 export const rentals: Rental[] = [
   {
-    id: "unit-1",
-    name: "Unit 1 — Garden Studio",
+    id: "flat-2f",
+    name: "2nd Floor — 2BHK",
     status: "available",
-    shortDescription: "Bright ground-floor studio with a private entrance.",
+    shortDescription: "Bright 2BHK with a spacious hall, modular kitchen and balcony.",
     description:
-      "A cozy, light-filled studio on the ground floor with its own private entrance. Freshly painted with warm neutral tones, a comfortable living area, and plenty of natural daylight throughout the day. Ideal for one person or a couple.",
-    price: 850,
-    currency: "$",
-    bedrooms: 0,
-    bathrooms: 1,
-    size: 32,
-    floor: "Ground floor",
-    images: ["/rentals/unit-1-living.png", "/rentals/unit-3-kitchen.png"],
-    amenities: ["Private entrance", "Furnished", "Heating", "Wi-Fi ready", "Kitchenette"],
-  },
-  {
-    id: "unit-2",
-    name: "Unit 2 — One Bedroom",
-    status: "available",
-    shortDescription: "Quiet one-bedroom with a calm, restful bedroom.",
-    description:
-      "A comfortable one-bedroom home with a separate, restful bedroom and a bright living space. Tucked away at the back of the building for extra quiet. Comes partly furnished and ready to move in.",
-    price: 1100,
-    currency: "$",
-    bedrooms: 1,
-    bathrooms: 1,
-    size: 48,
-    floor: "Ground floor",
-    images: ["/rentals/unit-2-bedroom.png", "/rentals/unit-1-living.png", "/rentals/unit-3-kitchen.png"],
-    amenities: ["Furnished", "Heating", "Wi-Fi ready", "Full kitchen", "Quiet location"],
-  },
-  {
-    id: "unit-3",
-    name: "Unit 3 — Modern Kitchen Flat",
-    status: "occupied",
-    shortDescription: "Open-plan flat with a modern, light-wood kitchen.",
-    description:
-      "An open-plan apartment built around a modern light-wood kitchen with a small dining nook. Great natural light and a clean, contemporary feel. Currently occupied — get in touch to join the waiting list.",
-    price: 1200,
-    currency: "$",
-    bedrooms: 1,
-    bathrooms: 1,
-    size: 52,
-    floor: "First floor",
-    images: ["/rentals/unit-3-kitchen.png", "/rentals/unit-4-living.png"],
-    amenities: ["Modern kitchen", "Dining nook", "Heating", "Wi-Fi ready", "Lots of light"],
-  },
-  {
-    id: "unit-4",
-    name: "Unit 4 — Spacious Living",
-    status: "available",
-    shortDescription: "Larger flat with a generous, sunlit living room.",
-    description:
-      "Our largest layout, with a generous sunlit living room, room for a dining table, and views over the greenery outside. A great fit for those who want a little more space to spread out.",
-    price: 1450,
-    currency: "$",
+      "A bright, semi-furnished 2BHK on the second floor. A spacious hall with marble-finish flooring opens onto a balcony, and the modular kitchen comes with granite counters, a chimney and a separate utility area. Both bedrooms have fitted wardrobes with dressers and warm wooden-finish flooring, plus modern attached bathrooms. Ready to move in.",
+    price: 22000,
+    currency: "₹",
     bedrooms: 2,
-    bathrooms: 1,
-    size: 68,
-    floor: "First floor",
-    images: ["/rentals/unit-4-living.png", "/rentals/unit-2-bedroom.png", "/rentals/unit-5-bathroom.png"],
-    amenities: ["Spacious living room", "2 bedrooms", "Heating", "Wi-Fi ready", "Full kitchen", "Garden view"],
+    bathrooms: 2,
+    size: 1050,
+    floor: "2nd floor",
+    images: [
+      "/pravik/photo-18.jpeg",
+      "/pravik/photo-5.jpeg",
+      "/pravik/photo-16.jpeg",
+      "/pravik/photo-15.jpeg",
+      "/pravik/photo-14.jpeg",
+      "/pravik/photo-12.jpeg",
+    ],
+    video: "/pravik/tour.mp4",
+    amenities: commonAmenities,
   },
   {
-    id: "unit-5",
-    name: "Unit 5 — Top Floor Retreat",
-    status: "coming-soon",
-    shortDescription: "Top-floor home with a fresh bathroom, available soon.",
-    description:
-      "A bright top-floor home with a freshly renovated bathroom and a peaceful atmosphere. Final touches are underway and it will be available to rent soon — reach out to be the first to know.",
-    price: 1300,
-    currency: "$",
-    bedrooms: 1,
-    bathrooms: 1,
-    size: 54,
-    floor: "Top floor",
-    images: ["/rentals/unit-5-bathroom.png", "/rentals/unit-1-living.png"],
-    amenities: ["Renovated bathroom", "Top floor", "Heating", "Wi-Fi ready", "Extra quiet"],
-  },
-  {
-    id: "unit-6",
-    name: "Unit 6 — Balcony Apartment",
+    id: "flat-3f",
+    name: "3rd Floor — 2BHK",
     status: "available",
-    shortDescription: "Charming flat with a private balcony for sunsets.",
+    shortDescription: "Quiet upper-floor 2BHK with great light and fitted wardrobes.",
     description:
-      "A charming apartment with its own private balcony — the perfect spot for morning coffee or watching the sunset. Comfortable and full of character, with a warm, welcoming feel throughout.",
-    price: 1250,
-    currency: "$",
-    bedrooms: 1,
-    bathrooms: 1,
-    size: 50,
+      "A peaceful 2BHK on the third floor with excellent natural light. The open hall flows into a teal modular kitchen with granite counters and a marble backsplash. Both bedrooms feature full-height glossy wardrobes with dressing mirrors and attached bathrooms finished in marble tile. Move-in ready.",
+    price: 23000,
+    currency: "₹",
+    bedrooms: 2,
+    bathrooms: 2,
+    size: 1050,
+    floor: "3rd floor",
+    images: [
+      "/pravik/photo-11.jpeg",
+      "/pravik/photo-1.jpeg",
+      "/pravik/photo-8.jpeg",
+      "/pravik/photo-17.jpeg",
+      "/pravik/photo-9.jpeg",
+    ],
+    video: "/pravik/tour.mp4",
+    amenities: commonAmenities,
+  },
+  {
+    id: "flat-1f",
+    name: "1st Floor — 2BHK",
+    status: "occupied",
+    shortDescription: "Comfortable first-floor 2BHK — currently occupied.",
+    description:
+      "A comfortable semi-furnished 2BHK on the first floor with the same modern finishes as the rest of the building — modular kitchen, fitted wardrobes and attached bathrooms. This flat is currently occupied; get in touch to join the waiting list and we'll let you know as soon as it frees up.",
+    price: 21000,
+    currency: "₹",
+    bedrooms: 2,
+    bathrooms: 2,
+    size: 1000,
+    floor: "1st floor",
+    images: [
+      "/pravik/photo-3.jpeg",
+      "/pravik/photo-4.jpeg",
+      "/pravik/photo-7.jpeg",
+      "/pravik/photo-10.jpeg",
+    ],
+    amenities: commonAmenities,
+  },
+  {
+    id: "flat-top",
+    name: "Top Floor — 2BHK",
+    status: "coming-soon",
+    shortDescription: "Top-floor 2BHK with final touches underway — available soon.",
+    description:
+      "A bright top-floor 2BHK with a little extra privacy and the same quality finishes throughout — modular kitchen, fitted wardrobes, wooden-finish bedroom flooring and modern bathrooms. Final touches are underway and it will be available to rent soon. Reach out to be the first to know.",
+    price: 23000,
+    currency: "₹",
+    bedrooms: 2,
+    bathrooms: 2,
+    size: 1050,
     floor: "Top floor",
-    images: ["/rentals/unit-6-balcony.png", "/rentals/unit-4-living.png"],
-    amenities: ["Private balcony", "Furnished", "Heating", "Wi-Fi ready", "Sunset views"],
+    images: [
+      "/pravik/photo-6.jpeg",
+      "/pravik/photo-16.jpeg",
+      "/pravik/photo-13.jpeg",
+      "/pravik/photo-18.jpeg",
+    ],
+    amenities: commonAmenities,
   },
 ]
 
