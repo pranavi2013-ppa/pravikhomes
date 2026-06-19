@@ -1,23 +1,91 @@
-export default function Page() {
+import Image from "next/image"
+import { SiteHeader } from "@/components/site-header"
+import { SiteFooter } from "@/components/site-footer"
+import { RentalCard } from "@/components/rental-card"
+import { ContactSection } from "@/components/contact-section"
+import { rentals, landlord } from "@/lib/rentals"
+
+export default function HomePage() {
+  const availableCount = rentals.filter((r) => r.status === "available").length
+
   return (
-    <main className="relative flex min-h-screen items-center justify-center bg-[color:light-dark(#fff,#000)] text-[color:light-dark(#000,#fff)]">
-      <svg
-        aria-hidden="true"
-        className="size-20"
-        fill="none"
-        viewBox="0 0 20 20"
-        xmlns="http://www.w3.org/2000/svg"
-        stroke="currentColor"
-        strokeWidth="0.5"
-      >
-        <path
-          d="M14.2 14.2H17V6.9375C17 4.76288 15.2371 3 13.0625 3H5.8V5.8M14.2 14.2V7.79063L7.79062 14.2H14.2ZM14.2 14.2V17H6.9375C4.76288 17 3 15.2371 3 13.0625V5.8H5.8M5.8 5.8V12.2313L12.2313 5.8H5.8Z"
-          strokeLinejoin="round"
-        />
-      </svg>
-      <p className="absolute left-1/2 top-[calc(50%+56px)] -translate-x-1/2 whitespace-nowrap text-sm font-medium text-muted-foreground">
-        Your v0 generation will show here.
-      </p>
-    </main>
+    <div className="flex min-h-screen flex-col">
+      <SiteHeader />
+
+      <main className="flex-1">
+        {/* Hero */}
+        <section className="relative">
+          <div className="mx-auto max-w-6xl px-4 pt-10 sm:px-6 sm:pt-16">
+            <div className="grid items-center gap-8 lg:grid-cols-[1.1fr_1fr] lg:gap-12">
+              <div>
+                <p className="font-mono text-xs uppercase tracking-widest text-primary">
+                  Homes for rent
+                </p>
+                <h1 className="mt-4 font-heading text-4xl font-semibold leading-[1.05] tracking-tight text-balance sm:text-5xl lg:text-6xl">
+                  {landlord.buildingName}
+                </h1>
+                <p className="mt-5 max-w-md text-lg leading-relaxed text-muted-foreground text-pretty">
+                  {landlord.intro}
+                </p>
+                <div className="mt-8 flex flex-wrap items-center gap-3">
+                  <a
+                    href="#homes"
+                    className="rounded-full bg-primary px-6 py-3 font-medium text-primary-foreground transition-opacity hover:opacity-90"
+                  >
+                    Browse {rentals.length} homes
+                  </a>
+                  <a
+                    href="#contact"
+                    className="rounded-full border border-border px-6 py-3 font-medium transition-colors hover:bg-secondary"
+                  >
+                    Get in touch
+                  </a>
+                </div>
+                <p className="mt-6 text-sm text-muted-foreground">
+                  {availableCount} available right now
+                </p>
+              </div>
+
+              <div className="relative aspect-[4/3] overflow-hidden rounded-3xl border border-border lg:aspect-[5/6]">
+                <Image
+                  src="/rentals/building-exterior.png"
+                  alt={`Exterior of ${landlord.buildingName}`}
+                  fill
+                  priority
+                  sizes="(min-width: 1024px) 45vw, 100vw"
+                  className="object-cover"
+                />
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* Listings */}
+        <section id="homes" className="scroll-mt-20 py-16 sm:py-24">
+          <div className="mx-auto max-w-6xl px-4 sm:px-6">
+            <div className="flex flex-col gap-2 sm:flex-row sm:items-end sm:justify-between">
+              <div>
+                <h2 className="font-heading text-3xl font-semibold tracking-tight sm:text-4xl">
+                  The homes
+                </h2>
+                <p className="mt-2 text-muted-foreground">
+                  Tap any home to see the full gallery, video tour and details.
+                </p>
+              </div>
+            </div>
+
+            <div className="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+              {rentals.map((rental) => (
+                <RentalCard key={rental.id} rental={rental} />
+              ))}
+            </div>
+          </div>
+        </section>
+
+        <ContactSection />
+      </main>
+
+      <SiteFooter />
+    </div>
   )
 }
