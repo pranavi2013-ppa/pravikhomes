@@ -38,6 +38,35 @@ export const landlord = {
   email: "pravikhomes@example.com",
 }
 
+/**
+ * Building-wide features shared by every flat. Edit the title/description
+ * of each item, or add a new one following the same shape.
+ */
+export const buildingFeatures: { icon: BuildingFeatureIcon; title: string; description: string }[] = [
+  {
+    icon: "droplet",
+    title: "Water softener",
+    description: "Soft water throughout the building — gentle on skin, hair, appliances and fittings.",
+  },
+  {
+    icon: "sun",
+    title: "Solar water heaters",
+    description: "Hot water powered by rooftop solar, so you enjoy warm showers with lower running costs.",
+  },
+  {
+    icon: "door",
+    title: "Separate residential entrance",
+    description: "A private entrance reserved for residents, kept apart from any other access.",
+  },
+  {
+    icon: "car",
+    title: "Secure tenant parking",
+    description: "Gated parking exclusively for tenants — no outside access to the parking area.",
+  },
+]
+
+export type BuildingFeatureIcon = "droplet" | "sun" | "door" | "car"
+
 const commonAmenities = [
   "Modern modular kitchen",
   "Fitted wardrobes",
