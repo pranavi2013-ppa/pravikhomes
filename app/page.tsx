@@ -1,19 +1,25 @@
+"use client"
+
 import Image from "next/image"
 import { SiteHeader } from "@/components/site-header"
 import { SiteFooter } from "@/components/site-footer"
 import { RentalCard } from "@/components/rental-card"
 import { ContactSection } from "@/components/contact-section"
-import { rentals, landlord } from "@/lib/rentals"
+import { useEffect, useState } from "react"
 
-export default function HomePage({ searchParams }: { searchParams?: { admin?: string } }) {
-  // Count of available rentals (used in hero)
+export default function HomePage() {
+  const [rentals, setRentals] = useState<any[]>([])
+
+  useEffect(() => {
+    async function load() {
+      const res = await fetch("/api/rentals", { credentials: "include" })
+      const json = await res.json()
+      setRentals(json)
+    }
+    load()
+  }, [])
+
   const availableCount = rentals.filter((r) => r.status === "available").length
-
-  // Admin check: compare query param to server env ADMIN_TOKEN
-  const isAdmin = Boolean(process.env.ADMIN_TOKEN && searchParams?.admin === process.env.ADMIN_TOKEN)
-
-  // Show all rentals for admin, otherwise show only available rentals
-  const visibleRentals = isAdmin ? rentals : rentals.filter((r) => r.status === "available")
 
   return (
     <div className="flex min-h-screen flex-col">
@@ -25,43 +31,18 @@ export default function HomePage({ searchParams }: { searchParams?: { admin?: st
           <div className="mx-auto max-w-6xl px-4 pt-10 sm:px-6 sm:pt-16">
             <div className="grid items-center gap-8 lg:grid-cols-[1.1fr_1fr] lg:gap-12">
               <div>
-                <p className="font-mono text-xs uppercase tracking-widest text-primary">
-                  Homes for rent
-                </p>
-                <h1 className="mt-4 font-heading text-4xl font-semibold leading-[1.05] tracking-tight text-balance sm:text-5xl lg:text-6xl">
-                  {landlord.buildingName}
-                </h1>
-                <p className="mt-5 max-w-md text-lg leading-relaxed text-muted-foreground text-pretty">
-                  {landlord.intro}
-                </p>
+                <p className="font-mono text-xs uppercase tracking-widest text-primary">Homes for rent</p>
+                <h1 className="mt-4 font-heading text-4xl font-semibold leading-[1.05] tracking-tight text-balance sm:text-5xl lg:text-6xl">PravikHomes</h1>
+                <p className="mt-5 max-w-md text-lg leading-relaxed text-muted-foreground text-pretty">PravikHomes is a newly built residential building with a handful of bright, semi-furnished 2BHK flats for rent.</p>
                 <div className="mt-8 flex flex-wrap items-center gap-3">
-                  <a
-                    href="#homes"
-                    className="rounded-full bg-primary px-6 py-3 font-medium text-primary-foreground transition-opacity hover:opacity-90"
-                  >
-                    Browse {visibleRentals.length} homes
-                  </a>
-                  <a
-                    href="#contact"
-                    className="rounded-full border border-border px-6 py-3 font-medium transition-colors hover:bg-secondary"
-                  >
-                    Get in touch
-                  </a>
+                  <a href="#homes" className="rounded-full bg-primary px-6 py-3 font-medium text-primary-foreground transition-opacity hover:opacity-90">Browse {rentals.length} homes</a>
+                  <a href="#contact" className="rounded-full border border-border px-6 py-3 font-medium transition-colors hover:bg-secondary">Get in touch</a>
                 </div>
-                <p className="mt-6 text-sm text-muted-foreground">
-                  {availableCount} available right now
-                </p>
+                <p className="mt-6 text-sm text-muted-foreground">{availableCount} available right now</p>
               </div>
 
               <div className="relative aspect-[4/3] overflow-hidden rounded-3xl border border-border lg:aspect-[5/6]">
-                <Image
-                  src="/pravik/building.jpeg"
-                  alt={`Exterior of ${landlord.buildingName}`}
-                  fill
-                  priority
-                  sizes="(min-width: 1024px) 45vw, 100vw"
-                  className="object-cover"
-                />
+                <Image src="/pravik/building.jpeg" alt={`Exterior of PravikHomes`} fill priority sizes="(min-width: 1024px) 45vw, 100vw" className="object-cover" />
               </div>
             </div>
           </div>
@@ -72,17 +53,13 @@ export default function HomePage({ searchParams }: { searchParams?: { admin?: st
           <div className="mx-auto max-w-6xl px-4 sm:px-6">
             <div className="flex flex-col gap-2 sm:flex-row sm:items-end sm:justify-between">
               <div>
-                <h2 className="font-heading text-3xl font-semibold tracking-tight sm:text-4xl">
-                  The homes {isAdmin ? "(admin view)" : ""}
-                </h2>
-                <p className="mt-2 text-muted-foreground">
-                  Tap any home to see the full gallery, video tour and details.
-                </p>
+                <h2 className="font-heading text-3xl font-semibold tracking-tight sm:text-4xl">The homes</h2>
+                <p className="mt-2 text-muted-foreground">Tap any home to see the full gallery, video tour and details.</p>
               </div>
             </div>
 
             <div className="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-              {visibleRentals.map((rental) => (
+              {rentals.map((rental) => (
                 <RentalCard key={rental.id} rental={rental} />
               ))}
             </div>
