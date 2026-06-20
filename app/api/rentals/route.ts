@@ -1,16 +1,17 @@
 import { NextResponse } from "next/server"
-import { Octokit } from "octokit"
 
 export const runtime = "node"
 
 async function fetchFromRepo(owner: string, repo: string, path: string, branch: string, token?: string) {
+  // If there is no GitHub token available, read the local file directly (useful for local dev)
   if (!token) {
-    // fall back to local file
     const fs = await import("fs")
     const data = fs.readFileSync(`./data/${path}`, "utf8")
     return JSON.parse(data)
   }
 
+  // Use Octokit only when a token is present — import dynamically so Next.js doesn't try to bundle it at build time
+  const { Octokit } = await import("octokit")
   const octokit = new Octokit({ auth: token })
   const res = await octokit.request("GET /repos/{owner}/{repo}/contents/{path}", { owner, repo, path: `data/${path}`, ref: branch })
   const content = (res.data as any).content
