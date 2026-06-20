@@ -28,12 +28,8 @@ export const landlord = {
   buildingName: "PravikHomes",
   tagline: "Brand-new, semi-furnished 2BHK flats for rent in a quiet, well-kept building.",
   intro:
-    "PravikHomes is a newly built residential building with a handful of bright, semi-furnished 2BHK flats for rent. Each home comes with a modern modular kitchen, fitted wardrobes, large windows and thoughtful finishes.",
+    "PravikHomes is a newly built residential building with a handful of bright, semi-furnished 2BHK flats for rent. Each home comes with a modern modular kitchen, fitted wardrobes, large windows and plenty of light.",
   address: "Bengaluru, Karnataka",
-  // TODO: replace with your real phone number.
-  phone: "+91 90000 00000",
-  // Digits only, with country code, no symbols — used for the WhatsApp link.
-  whatsapp: "919000000000",
   // Contact email used in the Contact section and enquiry mailto links.
   email: "pravikpremiumappartments@gmail.com",
 }
