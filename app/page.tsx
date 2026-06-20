@@ -5,8 +5,15 @@ import { RentalCard } from "@/components/rental-card"
 import { ContactSection } from "@/components/contact-section"
 import { rentals, landlord } from "@/lib/rentals"
 
-export default function HomePage() {
+export default function HomePage({ searchParams }: { searchParams?: { admin?: string } }) {
+  // Count of available rentals (used in hero)
   const availableCount = rentals.filter((r) => r.status === "available").length
+
+  // Admin check: compare query param to server env ADMIN_TOKEN
+  const isAdmin = Boolean(process.env.ADMIN_TOKEN && searchParams?.admin === process.env.ADMIN_TOKEN)
+
+  // Show all rentals for admin, otherwise show only available rentals
+  const visibleRentals = isAdmin ? rentals : rentals.filter((r) => r.status === "available")
 
   return (
     <div className="flex min-h-screen flex-col">
@@ -32,7 +39,7 @@ export default function HomePage() {
                     href="#homes"
                     className="rounded-full bg-primary px-6 py-3 font-medium text-primary-foreground transition-opacity hover:opacity-90"
                   >
-                    Browse {rentals.length} homes
+                    Browse {visibleRentals.length} homes
                   </a>
                   <a
                     href="#contact"
@@ -66,7 +73,7 @@ export default function HomePage() {
             <div className="flex flex-col gap-2 sm:flex-row sm:items-end sm:justify-between">
               <div>
                 <h2 className="font-heading text-3xl font-semibold tracking-tight sm:text-4xl">
-                  The homes
+                  The homes {isAdmin ? "(admin view)" : ""}
                 </h2>
                 <p className="mt-2 text-muted-foreground">
                   Tap any home to see the full gallery, video tour and details.
@@ -75,7 +82,7 @@ export default function HomePage() {
             </div>
 
             <div className="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-              {rentals.map((rental) => (
+              {visibleRentals.map((rental) => (
                 <RentalCard key={rental.id} rental={rental} />
               ))}
             </div>
