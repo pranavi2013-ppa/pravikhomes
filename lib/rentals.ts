@@ -34,8 +34,8 @@ export const landlord = {
   phone: "+91 90000 00000",
   // Digits only, with country code, no symbols — used for the WhatsApp link.
   whatsapp: "919000000000",
-  // TODO: replace with your real email.
-  email: "pravikhomes@example.com",
+  // Contact email used in the Contact section and enquiry mailto links.
+  email: "pravikpremiumappartments@gmail.com",
 }
 
 /**
